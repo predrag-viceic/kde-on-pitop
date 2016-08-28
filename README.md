@@ -36,13 +36,22 @@ Install the pydbus library and the dependancies in the virtual environment
 
 
 ####Python script
-The script should be saved to playmovie.py and launched from the directory that contains it
+
+The script inhibits the kde scrensaver an launches the omxplayer with correct settings. It also
+searches for subtitles.
 
 ```python
-#!venv/bin/python
+#!/usr/bin/python
+
+import os
+
+#Activate the virtual environment
+
+scriptdir=os.path.dirname(os.path.realpath(__file__))
+activate_this = scriptdir+'/venv/bin/activate_this.py'
+execfile(activate_this, dict(__file__=activate_this))
 
 import pydbus
-import os
 import sys
 import glob
 import re
@@ -73,6 +82,11 @@ subtitles = find_subtitles(filename)
 subtitles_command_argument="" if len(subtitles)==0 else "--subtitles "+subtitles[0]
 
 os.system("/usr/bin/omxplayer --vol 600 -b -o hdmi "+subtitles_command_argument+" "+filename);
+
+# Don't really need to uninhiit as this will bedone on pocess exit.
+screensaver.UnInhibit(cookie)
+exit(0)
+
 ```
 
 
