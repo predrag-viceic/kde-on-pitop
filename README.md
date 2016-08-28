@@ -2,6 +2,9 @@
 
 This repository contains some hints on how to use pi-top with KDE as a playground desktop for kids and Dads.
 
+The starting point of the installation is the image from the [Minibian](https://minibianpi.wordpress.com/) project and the result is the full blown desktop environment.
+I intend to document as much of the install process, so if interested, come back often ! :)
+
 
 ## Play a movie with omxplayer
 
