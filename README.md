@@ -83,7 +83,7 @@ subtitles_command_argument="" if len(subtitles)==0 else "--subtitles "+subtitles
 
 os.system("/usr/bin/omxplayer --vol 600 -b -o hdmi "+subtitles_command_argument+" "+filename);
 
-# Don't really need to uninhiit as this will bedone on pocess exit.
+# Don't really need to uninhibit as this will be done on process exit.
 screensaver.UnInhibit(cookie)
 exit(0)
 
