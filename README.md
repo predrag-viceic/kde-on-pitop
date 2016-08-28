@@ -8,7 +8,7 @@ This repository contains some hints on how to use pi-top with KDE as a playgroun
 First install omxplayer:
 `sudo apt-get install omxplayer`
 
-Omxplayer plays a video over the OpenMAX hardware acceleration circuitry and outputs he result to the display framebuffer. 
+Omxplayer plays a video over the OpenMAX hardware acceleration circuitry and outputs the result to the display framebuffer. 
 
 The movie is rendered fullscreen and the volume is set to 0.6dB.
 
@@ -94,11 +94,6 @@ exit(0)
 
 ```
 
-Play the movie !
-
-`playmovie movie.mkv`
-
-
 Copy the script and the venv to /opt 
 
 ```
@@ -108,7 +103,9 @@ sudo ln -s /opt/kdeonpitop/playmovie.py /usr/bin/playmovie
 sudo chmod ugo+x /opt/kdeonpitop/playmovie.py
 ```
 
+Play the movie !
 
+`playmovie movie.mkv`
 
 
 
