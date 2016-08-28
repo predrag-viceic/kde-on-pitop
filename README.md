@@ -1,22 +1,27 @@
 # KDE on Pi-top
 
-
-## omxplayer
-
-### Play a movie
-
-The movie is played fullscreen in a terminal. The volume is set to 0.6dB
+This repository contains some hints on how to use pi-top with KDE as a playground desktop for kids and Dads.
 
 
+## Play a movie with omxplayer
 
-`/usr/bin/omxplayer --vol 600 -b -o hdmi`
+First install omxplayer:
+`sudo apt-get install omxplayer`
+
+Omxplayer plays a video over the OpenMAX hardware acceleration circuitry and outputs he result to the display framebuffer. 
+
+The movie is rendered fullscreen and the volume is set to 0.6dB.
+
+
+
+`/usr/bin/omxplayer --vol 600 -b -o hdmi movie.mkv`
 
 
 
 
-### Use dbus to cancel the screensaver during movie play
+### Use D-BUS to cancel the screensaver during movie play
 
-We will use python to signal to the screesaver to Inhibit / UnInhibit
+We will use python to signal to the screensaver to Inhibit / UnInhibit
 
 #### Create a python virtual environment
 
@@ -37,7 +42,7 @@ Install the pydbus library and the dependancies in the virtual environment
 
 ####Python script
 
-The script inhibits the kde scrensaver an launches the omxplayer with correct settings. It also
+The script inhibits the kde scrensaver and launches the omxplayer with correct settings. It also
 searches for subtitles.
 
 ```python
@@ -88,6 +93,10 @@ screensaver.UnInhibit(cookie)
 exit(0)
 
 ```
+
+Play the movie !
+
+`playmovie movie.mkv`
 
 
 Copy the script and the venv to /opt 
