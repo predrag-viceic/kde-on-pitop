@@ -61,7 +61,6 @@
     local_action: wait_for host={{ inventory_hostname }} state=started port=22
     sudo: false
 
-
   - name: Device {{ inventory_hostname }} wake up and running ! Upgrading all the system to latest
     apt: upgrade=yes
 
@@ -93,7 +92,6 @@
   - name: Configure wpasupplicant
     template: src=config/etc/wpa_supplicant/wpa_supplicant.conf.template dest=/etc/wpa_supplicant/wpa_supplicant.conf
 
-
   - name: Restart network services
     service: name={{item}} state=restarted
     with_items:
@@ -105,10 +103,7 @@
   - name: Start Avahi service
     service: name=avahi-daemon state=started enabled=yes
 
-
-
-
-  - name: Lock root account. From now on you will log in login as {{hostname}}/{{hostname}}
+  - name: Lock root account. From now on you will log in on console as {{username}}/{{userpassword}}
     command: /usr/bin/passwd -l root
 
   - name: Reboot {{ inventory_hostname }}
@@ -116,4 +111,3 @@
     async: 0
     poll: 0
     ignore_errors: true
-
