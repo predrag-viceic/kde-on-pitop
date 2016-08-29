@@ -1,5 +1,5 @@
 ---
-- hosts: wificlient
+- hosts: pi-top
   remote_user: root
   gather_facts: no
   vars:
