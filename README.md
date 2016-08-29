@@ -5,6 +5,21 @@ This repository contains some hints on how to use pi-top with KDE as a playgroun
 The starting point of the installation is the image from the [Minibian](https://minibianpi.wordpress.com/) project and the result is the full blown desktop environment.
 I intend to document as much of the install process, so if interested, come back often ! :)
 
+[Here](/ansible) you'll find the [Ansible](https://www.ansible.com/) playbook with basic configuration. The KDE-specific playbooks are coming ASAP.
+
+You will have to configure the vars in pitop.yml and put the host ip  in hosts.pitop. You alse need your ssh public key in config/ssh_keys/id_dsa.pub (or similar) 
+
+The Pi should be connected with an ethernet cable to your router.  On boot, the ip adress is displayed on the screen.
+
+When configured, you can launch :
+
+`ansible-playbook -k -i hosts.pitop -u root  pitop.yml --check`
+
+When sure that you are orchestrating the correct server, remove *--check* option.
+
+
+## Install KDE
+
 
 ## Play a movie with omxplayer
 
