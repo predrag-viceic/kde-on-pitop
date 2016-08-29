@@ -1,6 +1,6 @@
 # KDE on Pi-top
 
-This repository contains some hints on how to use pi-top with KDE as a playground desktop for kids and Dads.
+This repository contains some hints on how to use [Pi-top](https://www.pi-top.com/) with [KDE](https://www.kde.org/) as a playground desktop.
 
 The starting point of the installation is the image from the [Minibian](https://minibianpi.wordpress.com/) project and the result is the full blown desktop environment.
 I intend to document as much of the install process, so if interested, come back often ! :)
@@ -20,6 +20,7 @@ When sure that you are orchestrating the correct server, remove *--check* option
 
 ## Install KDE
 
+More to come..
 
 ## Play a movie with omxplayer
 
