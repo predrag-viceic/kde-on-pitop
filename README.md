@@ -29,11 +29,11 @@ First install omxplayer:
 
 Omxplayer plays a video over the OpenMAX hardware acceleration circuitry and outputs the result to the display framebuffer. 
 
-The movie is rendered fullscreen and the volume is set to 0.6dB.
+The movie is rendered fullscreen and the volume is set to 1dB.
 
 
 
-`/usr/bin/omxplayer --vol 600 -b -o hdmi movie.mkv`
+`/usr/bin/omxplayer --vol 100 -b -o hdmi movie.mkv`
 
 
 
