@@ -61,7 +61,7 @@ Install the pydbus library and the dependancies in the virtual environment
 
 ####Python script
 
-The script [python/playmovie.sh](python/playmovie.py) inhibits the kde scrensaver and launches the omxplayer with correct settings. It also searches for subtitles. 
+The script [python/playmovie.sh](python/playmovie.h) inhibits the kde scrensaver and launches the omxplayer with correct settings. It also searches for subtitles. 
 Finally, it links the kde volume controls (kmix) to omxplayer volume via D-BUS.
 
 
