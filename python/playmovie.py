@@ -89,7 +89,7 @@ checkomxplayer()
 loop = GObject.MainLoop()
 loop.run()
 
-# Don't really need to uninhibit as this will bedone on pocess exit.
+# Don't really need to uninhibit as this will be done on process exit.
 screensaver.UnInhibit(cookie)
 
 

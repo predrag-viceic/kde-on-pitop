@@ -47,7 +47,7 @@ We will use python to signal to the screensaver to Inhibit / UnInhibit
 We need this in order to install pydbus which is not available as a Jessie package
 
 ```
- sudo aptitude install python-pip python-virtualenv python-gobject
+ sudo aptitude install python-pip python-virtualenv python-gobject dbus
  mkdir kde-on-pitop
  cd kde-on-pitop
  virtualenv --system-site-packages venv
@@ -77,6 +77,77 @@ sudo chmod ugo+x /opt/kdeonpitop/playmovie.py
 Play the movie !
 
 `playmovie movie.mkv`
+
+## Change screen brightness with pi-top brigthness keys
+
+First of all you should install a pi-top brightness control tool available in the [pi-top-install](https://github.com/rricharz/pi-top-install) repository.
+
+To do this, follow the steps:
+
+```
+wget https://github.com/rricharz/pi-top-install/archive/master.zip
+unzip master.zip
+mkdir -p /opt/kde-on-pitop/
+sudo cp pi-top-install-master/brightness /opt/kde-on-pitop/
+sudo ln -s /opt/kde-on-pitop/brightness /usr/bin/brightness
+```
+
+Now you can execute:
+```
+brightness decrease
+brightness increase
+```
+ 
+The last thing to do is to map pi-top brightness keys to the command.
+
+First you should add a `/etc/X11/Xmodmap` file with the following content:
+
+```
+keycode 199 = XF86MonBrightnessUp 
+keycode 198 = XF86MonBrightnessDown
+```
+
+And then execute :
+```
+xmodmap /etc/X11/Xmodmap
+```
+
+This will make the Pi-top brightness buttons available to KDE shortcut manager.
+
+In order to make this modification permanent,you should add a new file to your global X11 configuration:
+
+`sudo vim /etc/X11/Xsession.d/25x11-xmodmap`
+
+and put the following content:
+
+`[ -f /etc/X11/Xmodmap ] && xmodmap /etc/X11/Xmodmap`
+
+Finally we must tell to KDE the new mapping. This is done in System Configuration -> Shortcuts and gestures -> Custom shortcuts :
+
+- Edit -> New -> Global shortcut -> URL / Command
+- Rename "New action" to Pi-top brightness up
+- In Triggers tab type the brightness up key on your keyboard
+- In Action tab enter `sudo /usr/bin/brightness increase'
+
+Do the same for brightness down key.
+- Edit -> New -> Global shortcut -> URL / Command
+- Rename "New action" to Pi-top brightness down
+- In Triggers tab type the brightness down key on your keyboard
+- In Action tab enter `sudo /usr/bin/brightness decrease'
+
+Click apply !
+
+Now the pi-top keys should control the brightness of the screen.
+
+
+
+
+
+
+
+
+
+
 
 
 
