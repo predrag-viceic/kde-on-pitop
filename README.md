@@ -5,11 +5,11 @@ This repository contains some hints on how to use [Pi-top](https://www.pi-top.co
 The starting point of the installation is the image from the [Minibian](https://minibianpi.wordpress.com/) project and the result is the full blown desktop environment.
 I intend to document as much of the install process, so if interested, come back often ! :)
 
-The image should be burned on the sd card. The procedure differs depennding if you are using a sd card reader or usb adapter. For me, it amounts to:
+The image should be burned on the sd card. The procedure differs depending if you are using a sd card reader or usb adapter. For me, it amounts to:
 
 `tar xzOf 2016-03-12-jessie-minibian.tar.gz | sudo dd of=/dev/mmcblk0`
 
-For you this may be different. You should never launch this command if you are not sure about the parts comming after `of=`. If usnure,  you will find all the needed info at [www.raspberrypi.org](https://www.raspberrypi.org/documentation/installation/installing-images/).
+For you this may be different. You should **never** launch this command if you are not sure about the parts coming after `of=`. You will find all the needed info at [www.raspberrypi.org](https://www.raspberrypi.org/documentation/installation/installing-images/).
 
 
 
@@ -27,7 +27,7 @@ The default SSH password in Minibian image is [raspberry](https://minibianpi.wor
 
 When sure that you are orchestrating the correct server, remove `--check` option.
 
-The pleaybuk will take some time to run and will heat your CPU up to 86°C, depending on your ambient temperature. Don't touch the CPU  ! (now I'm sure you will touch it :) )
+The playbook will take some time to run and will heat your CPU up to 86°C, depending on your ambient temperature. Don't touch the CPU  ! (now I'm sure you will touch it :) )
 
 It the system hangs on reboot task (may happen), just Ctrl-C and restart the playbook.
 
