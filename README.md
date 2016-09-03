@@ -15,7 +15,7 @@ For you this may be different. You should **never** launch this command if you a
 
 [Here](/ansible) you'll find the [Ansible](https://www.ansible.com/) playbook with basic configuration. The KDE-specific playbooks are coming ASAP.
 
-You will have to configure the vars the inventory file in hosts.pitop. You also need your ssh public key in config/ssh_keys/id_dsa.pub (or similar) 
+You will have to configure the vars the inventory file  [hosts.pitop](ansible/hosts.pitop). You also need your ssh public key in config/ssh_keys/id_dsa.pub (or similar) 
 
 The Pi should be connected with an ethernet cable to your router.  On boot, the ip adress is displayed on the screen.
 
@@ -27,14 +27,10 @@ The default SSH password in Minibian image is [raspberry](https://minibianpi.wor
 
 When sure that you are orchestrating the correct server, remove `--check` option.
 
-The playbook will take some time to run and will heat your CPU up to 86°C, depending on your ambient temperature. Don't touch the CPU  ! (now I'm sure you will touch it :) )
+The playbook will take some time to run (~1h30) and will heat your CPU up to 86°C, depending on your ambient temperature. Don't touch the CPU  ! (now I'm sure you will touch it :) )
 
 It the system hangs on reboot task (may happen), just Ctrl-C and restart the playbook.
 
-
-## Install KDE
-
-More to come..
 
 ## Play a movie with omxplayer
 

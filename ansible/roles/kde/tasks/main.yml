@@ -1,5 +1,5 @@
 ---
--  name : Install KDE. This will take some time (~30 min)
+-  name : Install KDE. This will take some time (~1 hour)
    apt: name=kde-full state=present
 
 - name: Configure color depth
