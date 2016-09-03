@@ -1,2 +1,12 @@
 [pi-top]
-#enter your rpi network address
+#enter your rpi network address below
+
+[pi-top:vars]
+ #put your ssid here
+SSID=<ssid>
+#put your wifi password here
+wpa_password=<wifi password>
+hostname=pi-top
+username=pitop
+userpassword=pitop
+keypath=public_keys/id_dsa.pub
