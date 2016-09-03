@@ -5,6 +5,17 @@ This repository contains some hints on how to use [Pi-top](https://www.pi-top.co
 The starting point of the installation is the image from the [Minibian](https://minibianpi.wordpress.com/) project and the result is the full blown desktop environment.
 I intend to document as much of the install process, so if interested, come back often ! :)
 
+The image should be burned on the sd card. The procedure differs depennding if you are using a sd card reader or usb adapter. For me, it amounts to:
+
+`tar xzOf 2016-03-12-jessie-minibian.tar.gz | sudo dd of=/dev/mmcblk0`
+
+For you this may be different. You should never launch this command if you are not sure about the parts comming after `of=`. If usnure,  you will find all the needed info at [www.raspberrypi.org](https://www.raspberrypi.org/documentation/installation/installing-images/).
+
+
+
+
+
+
 [Here](/ansible) you'll find the [Ansible](https://www.ansible.com/) playbook with basic configuration. The KDE-specific playbooks are coming ASAP.
 
 You will have to configure the vars in pitop.yml and put the host ip  in hosts.pitop. You alse need your ssh public key in config/ssh_keys/id_dsa.pub (or similar) 
@@ -15,7 +26,9 @@ When configured, you can launch :
 
 `ansible-playbook -k -i hosts.pitop -u root  pitop.yml --check`
 
-When sure that you are orchestrating the correct server, remove *--check* option.
+The default SSH password in Minibian image is [raspberry](https://minibianpi.wordpress.com/faq/). Ansible playbook will ask you the SSH password and use it for the orchestration. After the orchestration is finished  it will disable console root access.
+
+When sure that you are orchestrating the correct server, remove `--check` option.
 
 
 ## Install KDE
