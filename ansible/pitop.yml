@@ -6,16 +6,15 @@
    SSID: [put your ssid here]
    wpa_password: [put your wifi password here]
    hostname: pi-top
-   username: pi-top
-   userpassword: pi-top
-   keypath: config/ssh_keys/id_dsa.pub
+   username: pitop
+   userpassword: pitop
+   keypath: public_keys/id_dsa.pub
 
   pre_tasks:
     - name: Install python2 dependency for ansible
       raw: apt-get -y install  python-simplejson
 
   tasks:
-
 
   - name:  Bootstrap apt-get and install aptitude
     apt: update_cache=yes name=aptitude state=present
@@ -24,20 +23,19 @@
     authorized_key: user=root key="{{ lookup('file', '{{keypath}}') }}"
   
   - name: Create new user {{username}}
-    shell: adduser pi-top creates=/home/{{username}}
+    shell: adduser --disabled-password --gecos {{username}} {{username}}  creates=/home/{{username}}
+
+  - name: Setup the password for {{username}}
+    user: name={{ username }} password={{ userpassword |password_hash('sha512') }}
 
   - name: Add user {{username}} to groups
-    user: name={{username}} groups=sudo,audio,video,bluetooth
+    user: name={{username}} groups=sudo,audio,video
 
   - name: Set {{username}} password to {{userpassword}}
     shell: echo {{username}}:{{userpassword}} | chpasswd
  
-
   - name: Disable ssh password authentication
     lineinfile: dest=/etc/ssh/sshd_config line="PasswordAuthentication no"
-
-  - name: Install vim
-    apt: name=vim state=present
 
   - name: Install raspi-config, rpi-update, vim, rsync
     apt: name={{item}} state=present
@@ -46,7 +44,6 @@
     - rpi-update
     - rsync
     - vim
-    - rsync
 
   - name: Resize partition
     command: raspi-config --expand-rootfs
@@ -111,3 +108,6 @@
     async: 0
     poll: 0
     ignore_errors: true
+
+  #roles: 
+  #- kde
