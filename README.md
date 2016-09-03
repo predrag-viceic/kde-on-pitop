@@ -139,6 +139,9 @@ Click apply !
 
 Now the pi-top keys should control the brightness of the screen.
 
+If you don't want to run brightness binary with sudo privileges, do as described 
+[here](http://quick2wire.com/non-root-access-to-spi-on-the-pi/)
+
 
 
 
