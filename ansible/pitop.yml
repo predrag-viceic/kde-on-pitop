@@ -8,5 +8,5 @@
       raw: apt-get -y install  python-simplejson
 
   roles: 
-  - system
+  #- system
   - kde

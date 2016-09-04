@@ -20,13 +20,14 @@
 - name: Disable ssh password authentication
   lineinfile: dest=/etc/ssh/sshd_config line="PasswordAuthentication no"
 
-- name: Install raspi-config, rpi-update, vim, rsync
+- name: Install raspi-config, rpi-update, vim, rsync and sudo
   apt: name={{item}} state=present
   with_items:
   - raspi-config
   - rpi-update
   - rsync
   - vim
+  - sudo
 
 - name: Resize partition
   command: raspi-config --expand-rootfs
@@ -55,6 +56,9 @@
 - name : Change hostname to {{hostname}}
   hostname: name={{hostname}}
 
+- name: Setup the hostname in /etc/hosts
+  lineinfile: dest=/etc/hosts regexp='127.0.0.1' line="127.0.0.1 localhost {{hostname}}" state=present
+
 - name: install iptables
   apt: name=iptables state=present
 
@@ -74,6 +78,9 @@
 - name: Configure wpasupplicant
   template: src=etc/wpa_supplicant/wpa_supplicant.conf.template dest=/etc/wpa_supplicant/wpa_supplicant.conf
 
+- name: Set DHCP timeout to 5 sec as not to take too long to boot with ethernet cable unplugged
+  lineinfile: dest=/etc/dhcp/dhclient.conf line="timeout 5"
+
 - name: Restart network services
   service: name={{item}} state=restarted
   with_items:
@@ -84,6 +91,9 @@
 
 - name: Start Avahi service
   service: name=avahi-daemon state=started enabled=yes
+
+- name: Allow paswordless acces to sudoers
+  lineinfile: dest=/etc/sudoers state=present regexp='^%sudo' line='%sudo ALL=NOPASSWD:ALL'
 
 - name: Lock root account. From now on you will log in on console as {{username}}/{{userpassword}}
   command: /usr/bin/passwd -l root
