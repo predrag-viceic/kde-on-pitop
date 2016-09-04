@@ -31,6 +31,9 @@ The playbook will take some time to run (~1h30) and will heat your CPU up to 86Â
 
 It the system hangs on reboot task (may happen), just Ctrl-C and restart the playbook.
 
+When everything is installed, your pi will be rebooted one more time and greet you with the KDM login screen. After login, press Alt-Shift-F12 to disable desktop effects. This can be done permanently in K-> System settings-> Desktop effects
+
+
 
 ## Play a movie with omxplayer
 

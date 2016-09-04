@@ -79,7 +79,10 @@
   template: src=etc/wpa_supplicant/wpa_supplicant.conf.template dest=/etc/wpa_supplicant/wpa_supplicant.conf
 
 - name: Set DHCP timeout to 5 sec as not to take too long to boot with ethernet cable unplugged
-  lineinfile: dest=/etc/dhcp/dhclient.conf line="timeout 5"
+  lineinfile: dest=/etc/dhcp/dhclient.conf line="timeout 5" state=present
+
+- name: Boost main USB bus power for wifi
+  lineinfile: dest=/boot/config.txt line="max_usb_current=1" state=present
 
 - name: Restart network services
   service: name={{item}} state=restarted
