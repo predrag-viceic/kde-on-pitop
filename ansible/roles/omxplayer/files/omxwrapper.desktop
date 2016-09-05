@@ -1,7 +1,6 @@
 [Desktop Entry]
 Type=Application
 MimeType=video/x-matroska;video/ogg;video/mp4;
-Name[fr]=omxwrapper
 Name=omxwrapper
 NoDisplay=true
 StartupNotify=true
