@@ -103,7 +103,7 @@ xdg-mime default omxwrapper.desktop video/mp4
 xdg-mime default omxwrapper.desktop video/x-matroska
 ```
 
-This can also be configured with the GUI, but where's the fun then :)
+This can also be configured with the GUI, but where's the fun in that :)
 
 
 
