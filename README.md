@@ -91,6 +91,22 @@ Play the movie !
 
 `playmovie movie.mkv`
 
+I you want to link your video files to this script so you can click directly from Dolphin, do the following:
+
+```
+sudo cp kde-on-pitop/ansible/roles/omxplayer/files/omxwrapper.desktop /usr/share/applications/
+sudo chmod 644 /usr/share/applications/omwrapper.desktop 
+sudo aptitude install desktop-file-utils
+sudo update-desktop-database
+sudo kbuildsycoca4
+xdg-mime default omxwrapper.desktop video/mp4
+xdg-mime default omxwrapper.desktop video/x-matroska
+```
+
+This can also be configured with the GUI, but where's the fun then :)
+
+
+
 ## Change screen brightness with pi-top brigthness keys
 
 First of all you should install a pi-top brightness control tool available in the [pi-top-install](https://github.com/rricharz/pi-top-install) repository.
