@@ -14,9 +14,6 @@
 - name: Add user {{username}} to groups
   user: name={{username}} groups=sudo,audio,video
 
-- name: Set {{username}} password to {{userpassword}}
-  shell: echo {{username}}:{{userpassword}} | chpasswd
-
 - name: Disable ssh password authentication
   lineinfile: dest=/etc/ssh/sshd_config line="PasswordAuthentication no"
 
@@ -89,7 +86,7 @@
   with_items:
   - networking
 
-- name: Install Avahi
+- name: Install Avahi. This allows you to connect to host with it's link-local address {{hostname}}.local
   apt: name=avahi-daemon state=present
 
 - name: Start Avahi service

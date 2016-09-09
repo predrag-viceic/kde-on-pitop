@@ -1,0 +1,34 @@
+[Event/locked]
+Action=Execute
+Execute=sudo /opt/pi-top/screenoff.sh
+KTTS=Economie d'energie enclenchée
+Logfile=
+Sound=
+
+[Event/savingstarted]
+Action=
+Execute=sudo /opt/pi-top/screenoff.sh
+KTTS=%s
+Logfile=file:///home/dev/events
+Sound=
+
+[Event/savingstopped]
+Action=
+Execute=sudo /opt/pi-top/screenon.sh
+KTTS=
+Logfile=file:///home/dev/events
+Sound=
+
+[Event/unlocked]
+Action=Execute
+Execute=sudo /opt/pi-top/screenon.sh
+KTTS=
+Logfile=
+Sound=
+
+[Event/unlockfailed]
+Action=
+Execute=
+KTTS=
+Logfile=
+Sound=
