@@ -77,16 +77,15 @@ currentdevice.controlChanged.connect(volumeChanged)
 time.sleep(2) #wait for omxplayer to come up
 volumeChanged()
 
-# Callback to check periodically if omxplayer is still running. If not exit
-from threading import Timer
+# Callback to check periodically if omxplayer is still running. If not exit	
+loop = GObject.MainLoop()
 
+from threading import Timer
 def checkomxplayer():
-  loop.quit() if omxhandle.poll() else Timer(1,checkomxplayer).start()   
+  loop.quit() if (loop.is_running() and omxhandle.poll()) else Timer(1,checkomxplayer).start()   
 
 checkomxplayer()
 
-# Create and run main loop
-loop = GObject.MainLoop()
 loop.run()
 
 # Don't really need to uninhibit as this will be done on process exit.
