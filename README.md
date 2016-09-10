@@ -41,6 +41,89 @@ It the system hangs on reboot task (may happen), just Ctrl-C and restart the pla
 
 When everything is installed, your pi will be rebooted one more time and greet you with the KDE login screen. After login, press Alt-Shift-F12 to disable desktop effects. This can be done permanently in K-> System settings-> Desktop effects
 
+## Change screen brightness with pi-top brightness keys
+
+First of all you should install a pi-top brightness control tool available in the [pi-top-install](https://github.com/rricharz/pi-top-install) repository.
+
+To do this, follow the steps:
+
+```
+wget https://github.com/rricharz/pi-top-install/archive/master.zip
+unzip master.zip
+mkdir -p /opt/kde-on-pitop/
+sudo cp pi-top-install-master/brightness /opt/kde-on-pitop/
+sudo ln -s /opt/kde-on-pitop/brightness /usr/bin/brightness
+```
+
+Now you can execute:
+```
+brightness decrease
+brightness increase
+```
+ 
+The last thing to do is to map pi-top brightness keys to the playmovie command.
+
+First you should add a `/etc/X11/Xmodmap` file with the following content:
+
+```
+keycode 199 = XF86MonBrightnessUp 
+keycode 198 = XF86MonBrightnessDown
+```
+
+And then execute :
+```
+xmodmap /etc/X11/Xmodmap
+```
+
+This will make the Pi-top brightness buttons available to KDE shortcut manager.
+
+In order to make this modification permanent,you should add a new file to your global X11 configuration:
+
+`sudo vim /etc/X11/Xsession.d/25x11-xmodmap`
+
+and put the following content:
+
+`[ -f /etc/X11/Xmodmap ] && xmodmap /etc/X11/Xmodmap`
+
+Finally we must tell to KDE the new mapping. This is done in System Configuration -> Shortcuts and gestures -> Custom shortcuts :
+
+- Edit -> New -> Global shortcut -> URL / Command
+- Rename "New action" to Pi-top brightness up
+- In Triggers tab type the brightness up key on your keyboard
+- In Action tab enter `sudo /usr/bin/brightness increase'
+
+Do the same for brightness down key.
+- Edit -> New -> Global shortcut -> URL / Command
+- Rename "New action" to Pi-top brightness down
+- In Triggers tab type the brightness down key on your keyboard
+- In Action tab enter `sudo /usr/bin/brightness decrease'
+
+Click apply !
+
+You can also import the provided [pi-top-brightness.khotkeys](ansible/roles/kde/files/pi-top-brightness.khotkeys) file. You will however need to re-affect the brightness keys in GUI because by  default they are handled by kded.
+
+Now the pi-top keys should control the brightness of the screen.
+
+If you don't want to run brightness binary with sudo privileges, do as described 
+[here](http://quick2wire.com/non-root-access-to-spi-on-the-pi/)
+
+
+
+## Shutdown the screen back-light on screen-saver event
+
+`brightness` binary can be used with *on* and *off* command line parameters which allow to shut off/on the piTop screen backlight. We will use this to shut down the screen when the screensaver kicks in, and to bring it up when you screensaver stops.
+
+First you should configure the screensaver, ie:
+`cp ansible/roles/kde/files/kscreensaverrc ~/.kde/share/config/ `
+
+And then link this event with the `brightness` binary:
+`cp ansible/roles/kde/files/ksmserver.notifyrc ~/.kde/share/config/`
+
+After 60 seconds of inactivity, you screen should go off. It should wakeup on keyboard or mouse event.
+We do not lock the screen with a password as this is primarily intended as power-saving feature. 
+
+
+
 
 
 ## Play a movie with omxplayer
@@ -116,71 +199,6 @@ This can also be configured with the GUI, but where's the fun in that :)
 
 
 
-## Change screen brightness with pi-top brightness keys
-
-First of all you should install a pi-top brightness control tool available in the [pi-top-install](https://github.com/rricharz/pi-top-install) repository.
-
-To do this, follow the steps:
-
-```
-wget https://github.com/rricharz/pi-top-install/archive/master.zip
-unzip master.zip
-mkdir -p /opt/kde-on-pitop/
-sudo cp pi-top-install-master/brightness /opt/kde-on-pitop/
-sudo ln -s /opt/kde-on-pitop/brightness /usr/bin/brightness
-```
-
-Now you can execute:
-```
-brightness decrease
-brightness increase
-```
- 
-The last thing to do is to map pi-top brightness keys to the playmovie command.
-
-First you should add a `/etc/X11/Xmodmap` file with the following content:
-
-```
-keycode 199 = XF86MonBrightnessUp 
-keycode 198 = XF86MonBrightnessDown
-```
-
-And then execute :
-```
-xmodmap /etc/X11/Xmodmap
-```
-
-This will make the Pi-top brightness buttons available to KDE shortcut manager.
-
-In order to make this modification permanent,you should add a new file to your global X11 configuration:
-
-`sudo vim /etc/X11/Xsession.d/25x11-xmodmap`
-
-and put the following content:
-
-`[ -f /etc/X11/Xmodmap ] && xmodmap /etc/X11/Xmodmap`
-
-Finally we must tell to KDE the new mapping. This is done in System Configuration -> Shortcuts and gestures -> Custom shortcuts :
-
-- Edit -> New -> Global shortcut -> URL / Command
-- Rename "New action" to Pi-top brightness up
-- In Triggers tab type the brightness up key on your keyboard
-- In Action tab enter `sudo /usr/bin/brightness increase'
-
-Do the same for brightness down key.
-- Edit -> New -> Global shortcut -> URL / Command
-- Rename "New action" to Pi-top brightness down
-- In Triggers tab type the brightness down key on your keyboard
-- In Action tab enter `sudo /usr/bin/brightness decrease'
-
-Click apply !
-
-You can also import the provided [pi-top-brightness.khotkeys](ansible/roles/kde/files/pi-top-brightness.khotkeys) file. You will however need to re-affect the brightness keys in GUI because by  default they are handled by kded.
-
-Now the pi-top keys should control the brightness of the screen.
-
-If you don't want to run brightness binary with sudo privileges, do as described 
-[here](http://quick2wire.com/non-root-access-to-spi-on-the-pi/)
 
 
 

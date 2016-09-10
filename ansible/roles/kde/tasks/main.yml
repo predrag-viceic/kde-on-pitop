@@ -4,6 +4,9 @@
 
 - name: Configure color depth
   lineinfile: dest=/boot/config.txt line="framebuffer_depth=32"
+  
+- name: Overclock the SD card reader 
+  lineinfile: dest=/boot/config.txt line="dtparam=sd_overclock=100"
    
 
 
