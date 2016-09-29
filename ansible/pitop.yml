@@ -5,8 +5,8 @@
 
   pre_tasks:
     - name: Install python2 dependency for ansible
-      raw: apt-get -y install  python-simplejson
+      raw: apt-get update; apt-get -y install  python-simplejson
 
   roles: 
-  #- system
-  - kde
+  - system
+    #- kde
